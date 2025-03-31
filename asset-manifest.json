@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/santiskills-dashboard/static/css/main.bb2caa86.css",
+    "main.js": "/santiskills-dashboard/static/js/main.a1a6dc69.js",
+    "static/js/453.48e483d8.chunk.js": "/santiskills-dashboard/static/js/453.48e483d8.chunk.js",
+    "index.html": "/santiskills-dashboard/index.html",
+    "main.bb2caa86.css.map": "/santiskills-dashboard/static/css/main.bb2caa86.css.map",
+    "main.a1a6dc69.js.map": "/santiskills-dashboard/static/js/main.a1a6dc69.js.map",
+    "453.48e483d8.chunk.js.map": "/santiskills-dashboard/static/js/453.48e483d8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bb2caa86.css",
+    "static/js/main.a1a6dc69.js"
+  ]
+}
