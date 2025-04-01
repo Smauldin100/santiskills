@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/santiskills-dashboard/static/css/main.b9dc99ca.css",
-    "main.js": "/santiskills-dashboard/static/js/main.d6d58dce.js",
+    "main.css": "/santiskills-dashboard/static/css/main.ade2f466.css",
+    "main.js": "/santiskills-dashboard/static/js/main.585c8f96.js",
     "static/js/453.48e483d8.chunk.js": "/santiskills-dashboard/static/js/453.48e483d8.chunk.js",
     "index.html": "/santiskills-dashboard/index.html",
-    "main.b9dc99ca.css.map": "/santiskills-dashboard/static/css/main.b9dc99ca.css.map",
-    "main.d6d58dce.js.map": "/santiskills-dashboard/static/js/main.d6d58dce.js.map",
+    "main.ade2f466.css.map": "/santiskills-dashboard/static/css/main.ade2f466.css.map",
+    "main.585c8f96.js.map": "/santiskills-dashboard/static/js/main.585c8f96.js.map",
     "453.48e483d8.chunk.js.map": "/santiskills-dashboard/static/js/453.48e483d8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b9dc99ca.css",
-    "static/js/main.d6d58dce.js"
+    "static/css/main.ade2f466.css",
+    "static/js/main.585c8f96.js"
   ]
 }
