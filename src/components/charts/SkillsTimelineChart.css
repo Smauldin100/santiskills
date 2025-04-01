@@ -1,0 +1,54 @@
+.skills-timeline-container {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.skills-timeline-container h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #34495e;
+  font-size: 1.5rem;
+}
+
+.skills-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.skill-toggle {
+  background-color: #f1f2f6;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #2c3e50;
+}
+
+.skill-toggle:hover {
+  background-color: #dfe4ea;
+}
+
+.skill-toggle.active {
+  color: white;
+  font-weight: 500;
+}
+
+.skills-timeline-info {
+  margin-top: 1rem;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .skills-selector {
+    justify-content: center;
+  }
+} 

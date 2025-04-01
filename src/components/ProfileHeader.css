@@ -1,0 +1,107 @@
+.profile-header {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-placeholder {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  font-weight: bold;
+}
+
+.profile-info {
+  flex-grow: 1;
+}
+
+.profile-info h1 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 2.5rem;
+}
+
+.profile-info h2 {
+  margin: 0.5rem 0 1rem;
+  color: #7f8c8d;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.profile-bio {
+  margin-bottom: 1.5rem;
+  color: #34495e;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.profile-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #34495e;
+}
+
+.contact-icon {
+  font-size: 1.2rem;
+}
+
+.profile-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.profile-link {
+  background-color: #f1f2f6;
+  color: #2c3e50;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.profile-link:hover {
+  background-color: #2c3e50;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .profile-header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-contact {
+    justify-content: center;
+  }
+
+  .profile-links {
+    justify-content: center;
+  }
+} 
