@@ -64,6 +64,48 @@
   padding: 15px;
   color: white;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatbot-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ai-mode-indicator {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.ai-mode-indicator.real-ai {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.ai-mode-indicator.simulated-ai {
+  background-color: #FFC107;
+  color: #333;
+}
+
+.ai-toggle-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-self: flex-end;
+}
+
+.ai-toggle-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .chatbot-messages {
@@ -203,6 +245,15 @@
 
 .send-icon {
   font-size: 18px;
+}
+
+.chatbot-footer {
+  padding: 8px;
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  background-color: #f8f8f8;
+  border-top: 1px solid #eee;
 }
 
 @media (max-width: 480px) {

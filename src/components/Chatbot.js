@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { personalInfo, skillsData, projectsData, experienceData } from '../data/personalData';
+import { getAIResponse } from '../utils/openaiService';
 import './Chatbot.css';
 
 const Chatbot = () => {
@@ -12,6 +13,8 @@ const Chatbot = () => {
   ]);
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  // Flag to toggle between simulated AI and real OpenAI
+  const [useRealAI, setUseRealAI] = useState(false);
   const messagesEndRef = useRef(null);
   
   // Auto-scroll to bottom of messages
@@ -34,6 +37,20 @@ const Chatbot = () => {
       handleSendMessage();
     }
   };
+
+  // Toggle between real OpenAI and simulated AI
+  const toggleAIMode = () => {
+    setUseRealAI(!useRealAI);
+    setMessages([
+      ...messages,
+      { 
+        text: useRealAI 
+          ? "Switching to simulated AI mode. Responses will be generated locally." 
+          : "Switching to OpenAI mode. Responses will come from the OpenAI API.", 
+        sender: 'bot'
+      }
+    ]);
+  };
   
   const handleSendMessage = async () => {
     if (inputText.trim() === '') return;
@@ -48,44 +65,57 @@ const Chatbot = () => {
     setInputText('');
     setIsLoading(true);
     
-    // Check for local responses first
-    const localResponse = generateLocalResponse(inputText);
-    
-    if (localResponse) {
-      // Use local response
-      setTimeout(() => {
-        setMessages([...newMessages, { text: localResponse, sender: 'bot' }]);
-        setIsLoading(false);
-      }, 600);
-    } else {
-      try {
-        // Call external AI API for response
-        const aiResponse = await fetchAIResponse(inputText, newMessages);
-        setMessages([...newMessages, { text: aiResponse, sender: 'bot' }]);
-      } catch (error) {
-        console.error('Error fetching AI response:', error);
-        setMessages([
-          ...newMessages, 
-          { 
-            text: "I'm having trouble connecting to my knowledge base. Let me answer with what I know: " + generateFallbackResponse(inputText), 
-            sender: 'bot' 
-          }
-        ]);
-      } finally {
-        setIsLoading(false);
+    try {
+      let response;
+      
+      // Check if the message is a command to toggle AI mode
+      if (inputText.toLowerCase().includes('use openai') || 
+          inputText.toLowerCase().includes('switch to openai') ||
+          inputText.toLowerCase().includes('use real ai')) {
+        setUseRealAI(true);
+        response = "Now using OpenAI for responses. Your questions will be answered using the OpenAI API.";
+      } 
+      else if (inputText.toLowerCase().includes('use simulated') || 
+               inputText.toLowerCase().includes('switch to simulated') ||
+               inputText.toLowerCase().includes('use fake ai')) {
+        setUseRealAI(false);
+        response = "Now using simulated AI for responses. Your questions will be answered using local logic.";
       }
+      else {
+        // Check for local responses first (only when not using real AI)
+        const localResponse = !useRealAI ? generateLocalResponse(inputText) : null;
+        
+        if (localResponse) {
+          // Use local response
+          response = localResponse;
+        } else if (useRealAI) {
+          // Use real OpenAI
+          response = await getAIResponse(inputText, newMessages);
+        } else {
+          // Use simulated AI
+          response = await fetchSimulatedAIResponse(inputText, newMessages);
+        }
+      }
+      
+      // Add bot response
+      setMessages([...newMessages, { text: response, sender: 'bot' }]);
+    } catch (error) {
+      console.error('Error processing message:', error);
+      setMessages([
+        ...newMessages, 
+        { 
+          text: "I'm having trouble responding right now. Let me answer with what I know: " + generateFallbackResponse(inputText), 
+          sender: 'bot' 
+        }
+      ]);
+    } finally {
+      setIsLoading(false);
     }
   };
   
-  // Function to fetch AI response from an API
-  const fetchAIResponse = async (userInput, messageHistory) => {
-    // This function would typically make an API call to OpenAI or similar service
-    // For now, we'll simulate a response based on the input
-    
-    // In a real implementation, you would:
-    // 1. Format the message history and current question
-    // 2. Send to OpenAI API
-    // 3. Return the AI-generated response
+  // Function to fetch simulated AI response
+  const fetchSimulatedAIResponse = async (userInput, messageHistory) => {
+    // This function simulates AI responses without making actual API calls
     
     // Simulating API call delay
     return new Promise((resolve) => {
@@ -184,7 +214,7 @@ const Chatbot = () => {
     return null;
   };
   
-  // Fallback response if AI call fails
+  // Fallback response if API call fails
   const generateFallbackResponse = (userInput) => {
     return "I can tell you about Santiago's skills, projects, experience, education, or provide contact information. For more complex questions, try again later when my AI capabilities are fully operational.";
   };
@@ -200,7 +230,15 @@ const Chatbot = () => {
       {isOpen && (
         <div className="chatbot-window">
           <div className="chatbot-header">
-            <div className="chatbot-title">Chat with Santi AI</div>
+            <div className="chatbot-title">
+              Chat with Santi AI
+              <span className={`ai-mode-indicator ${useRealAI ? 'real-ai' : 'simulated-ai'}`}>
+                {useRealAI ? 'OpenAI' : 'Simulated AI'}
+              </span>
+            </div>
+            <button className="ai-toggle-button" onClick={toggleAIMode}>
+              {useRealAI ? 'Switch to Simulated AI' : 'Switch to OpenAI'}
+            </button>
           </div>
           
           <div className="chatbot-messages">
@@ -240,6 +278,9 @@ const Chatbot = () => {
             <button onClick={handleSendMessage} disabled={isLoading || inputText.trim() === ''}>
               <span className="send-icon">→</span>
             </button>
+          </div>
+          <div className="chatbot-footer">
+            {useRealAI ? 'Powered by OpenAI' : 'Using simulated responses'}
           </div>
         </div>
       )}
