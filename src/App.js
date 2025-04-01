@@ -7,6 +7,7 @@ import EducationSection from './components/sections/EducationSection';
 import CertificationsSection from './components/sections/CertificationsSection';
 import SkillsTimelineChart from './components/charts/SkillsTimelineChart';
 import LanguageUsageChart from './components/charts/LanguageUsageChart';
+import Chatbot from './components/Chatbot';
 import './App.css';
 
 function App() {
@@ -99,6 +100,9 @@ function App() {
       <footer className="App-footer">
         <p>&copy; 2023 Santiago Mauldin. All rights reserved.</p>
       </footer>
+      
+      {/* Chatbot component */}
+      <Chatbot />
     </div>
   );
 }
