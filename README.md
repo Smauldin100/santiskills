@@ -1,8 +1,11 @@
 # SantiSkills Dashboard
 
-An interactive dashboard showcasing Santiago Mauldin's skills, projects, experience, education, and certifications. Built with React and Recharts.
+An interactive dashboard showcasing Santiago Mauldin's skills, projects, experience, education, and certifications. Built with React and Material-UI.
 
-## Features
+## 📌 Live Demo
+Visit the live dashboard at: [https://smauldin100.github.io/santiskills-dashboard](https://smauldin100.github.io/santiskills-dashboard)
+
+## ✨ Features
 - Professional profile section with contact information
 - Interactive skills radar chart with category filtering
 - Project portfolio with detailed cards and completion status
@@ -10,81 +13,112 @@ An interactive dashboard showcasing Santiago Mauldin's skills, projects, experie
 - Education and certification sections
 - Skills growth timeline showing progression over time
 - Programming language usage statistics
+- Modern Material-UI design system
+- Responsive layout for all devices
 
-## Live Demo
-Visit the live dashboard at: [https://smauldin100.github.io/santiskills-dashboard](https://smauldin100.github.io/santiskills-dashboard)
+## 🚀 Quick Start Guide
 
-## Getting Started with Create React App
+### Prerequisites
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+- Git
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/Smauldin100/santiskills-dashboard.git
+cd santiskills-dashboard
+```
 
-### Available Scripts
+### Step 2: Install Dependencies
+```bash
+npm install
+```
 
-In the project directory, you can run:
+### Step 3: Set Up Environment Variables
+Create a `.env` file in the root directory and add necessary environment variables:
+```env
+REACT_APP_API_URL=your_api_url_here
+```
 
-#### `npm start`
+### Step 4: Start Development Server
+```bash
+npm start
+```
+The app will open at [http://localhost:3000](http://localhost:3000)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 📦 Project Structure
+```
+santiskills-dashboard/
+├── public/                 # Static files
+├── src/                    # Source code
+│   ├── components/        # React components
+│   ├── pages/            # Page components
+│   ├── assets/           # Images and static assets
+│   ├── styles/           # CSS and style files
+│   ├── utils/            # Utility functions
+│   └── App.js            # Main App component
+├── package.json          # Project dependencies
+└── README.md            # Project documentation
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Available Scripts
 
-#### `npm test`
+| Command | Description |
+|---------|-------------|
+| `npm start` | Runs the app in development mode |
+| `npm test` | Launches the test runner |
+| `npm run build` | Builds the app for production |
+| `npm run deploy` | Deploys the app to GitHub Pages |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Deployment Guide
 
-#### `npm run build`
+### Deploying to GitHub Pages
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Update the `homepage` field in `package.json`:
+```json
+{
+  "homepage": "https://Smauldin100.github.io/santiskills-dashboard"
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install GitHub Pages dependency (if not already installed):
+```bash
+npm install --save-dev gh-pages
+```
 
-#### `npm run deploy`
+3. Deploy the application:
+```bash
+npm run deploy
+```
 
-Deploys the app to GitHub Pages. This will run a build first and then publish to the gh-pages branch.
+The app will be deployed to the `gh-pages` branch and accessible at your GitHub Pages URL.
 
-## Project Structure
-- `/src/components` - React components for the dashboard
-- `/src/components/charts` - Chart components using Recharts
-- `/src/components/sections` - Major dashboard sections
-- `/src/data` - Personal data for the dashboard
-
-## Technologies Used
-- React
-- Recharts (for data visualization)
+## 🔧 Technologies Used
+- React 18
+- Material-UI
+- React Router DOM
+- Recharts for data visualization
+- Firebase (for backend services)
 - GitHub Pages (for deployment)
-- CSS3 (for styling)
+- Formik & Yup (for form handling)
+- React Big Calendar
+- Styled Components
 
-## Learn More
+## 🤝 Contributing
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/improvement`)
+3. Make your changes
+4. Commit your changes (`git commit -am 'Add new feature'`)
+5. Push to the branch (`git push origin feature/improvement`)
+6. Create a Pull Request
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📝 License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📧 Contact
+Santiago Mauldin - [GitHub Profile](https://github.com/Smauldin100)
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🙏 Acknowledgments
+- Create React App team for the initial project setup
+- Material-UI team for the component library
+- All contributors who have helped improve this dashboard
