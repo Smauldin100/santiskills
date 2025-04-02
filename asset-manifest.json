@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/santiskills-dashboard/static/css/main.93ef0826.css",
-    "main.js": "/santiskills-dashboard/static/js/main.048ab331.js",
-    "static/js/453.48e483d8.chunk.js": "/santiskills-dashboard/static/js/453.48e483d8.chunk.js",
-    "index.html": "/santiskills-dashboard/index.html",
-    "main.93ef0826.css.map": "/santiskills-dashboard/static/css/main.93ef0826.css.map",
-    "main.048ab331.js.map": "/santiskills-dashboard/static/js/main.048ab331.js.map",
-    "453.48e483d8.chunk.js.map": "/santiskills-dashboard/static/js/453.48e483d8.chunk.js.map"
+    "main.css": "/SantiSkills-dashboard/static/css/main.93ef0826.css",
+    "main.js": "/SantiSkills-dashboard/static/js/main.f5b1c2b1.js",
+    "static/js/453.48e483d8.chunk.js": "/SantiSkills-dashboard/static/js/453.48e483d8.chunk.js",
+    "index.html": "/SantiSkills-dashboard/index.html",
+    "main.93ef0826.css.map": "/SantiSkills-dashboard/static/css/main.93ef0826.css.map",
+    "main.f5b1c2b1.js.map": "/SantiSkills-dashboard/static/js/main.f5b1c2b1.js.map",
+    "453.48e483d8.chunk.js.map": "/SantiSkills-dashboard/static/js/453.48e483d8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.93ef0826.css",
-    "static/js/main.048ab331.js"
+    "static/js/main.f5b1c2b1.js"
   ]
 }
