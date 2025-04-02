@@ -5,6 +5,56 @@ An interactive dashboard showcasing Santiago Mauldin's skills, projects, experie
 ## 📌 Live Demo
 Visit the live dashboard at: [https://smauldin100.github.io/santiskills-dashboard](https://smauldin100.github.io/santiskills-dashboard)
 
+## 📱 Accessing the Application
+
+### Web Access
+1. Open your web browser (Chrome, Firefox, Safari, or Edge recommended)
+2. Visit [https://smauldin100.github.io/santiskills-dashboard](https://smauldin100.github.io/santiskills-dashboard)
+3. The dashboard will load automatically
+
+### Mobile Access
+- The dashboard is fully responsive and can be accessed on any mobile device
+- Simply visit the same URL on your mobile browser
+- The interface will automatically adjust to your screen size
+
+### Navigation Guide
+1. **Main Dashboard**
+   - Overview of skills and recent activities
+   - Quick access to all major sections
+   - Real-time updates of project status
+
+2. **Profile Section**
+   - Professional information
+   - Contact details
+   - Download resume option
+
+3. **Skills Section**
+   - Interactive radar chart
+   - Filter skills by category
+   - View skill progression over time
+
+4. **Projects Portfolio**
+   - Browse through completed and ongoing projects
+   - Filter projects by technology
+   - View detailed project descriptions
+
+5. **Experience Timeline**
+   - Chronological view of professional experience
+   - Interactive timeline navigation
+   - Detailed role descriptions
+
+6. **Education & Certifications**
+   - Academic achievements
+   - Professional certifications
+   - Continuing education
+
+### Troubleshooting Access
+If you experience any issues:
+1. Clear your browser cache
+2. Try a different browser
+3. Check your internet connection
+4. For persistent issues, contact through the GitHub profile
+
 ## ✨ Features
 - Professional profile section with contact information
 - Interactive skills radar chart with category filtering
