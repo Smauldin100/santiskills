@@ -1,0 +1,433 @@
+{% extends "base.html" %}
+
+{% block title %}AI Chat{% endblock %}
+
+{% block header %}AI Chat{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-sidebar">
+        <div class="chat-options">
+            <h3>Chat Options</h3>
+            <div class="option-group">
+                <label>Model</label>
+                <select id="modelSelect">
+                    <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                    <option value="gpt-4">GPT-4</option>
+                </select>
+            </div>
+            <div class="option-group">
+                <label>Temperature</label>
+                <input type="range" id="tempRange" min="0" max="2" step="0.1" value="0.7">
+                <span id="tempValue">0.7</span>
+            </div>
+            <div class="option-group">
+                <label>Context Length</label>
+                <select id="contextSelect">
+                    <option value="3">Last 3 messages</option>
+                    <option value="5">Last 5 messages</option>
+                    <option value="10">Last 10 messages</option>
+                    <option value="all">All messages</option>
+                </select>
+            </div>
+        </div>
+        <div class="chat-history">
+            <h3>Chat History</h3>
+            <div class="history-list">
+                <div class="history-item active">
+                    <span class="mdi mdi-message-text"></span>
+                    <div class="history-content">
+                        <p>Current Chat</p>
+                        <small>Just now</small>
+                    </div>
+                </div>
+                <div class="history-item">
+                    <span class="mdi mdi-message-text"></span>
+                    <div class="history-content">
+                        <p>Data Analysis</p>
+                        <small>2 hours ago</small>
+                    </div>
+                </div>
+                <div class="history-item">
+                    <span class="mdi mdi-message-text"></span>
+                    <div class="history-content">
+                        <p>Code Review</p>
+                        <small>Yesterday</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat-main">
+        <div id="chatMessages" class="chat-messages">
+            <div class="message message-ai">
+                <span class="mdi mdi-robot"></span>
+                <div class="message-content">
+                    <p>Hello! How can I assist you today?</p>
+                    <div class="message-actions">
+                        <button class="action-btn" title="Copy">
+                            <span class="mdi mdi-content-copy"></span>
+                        </button>
+                        <button class="action-btn" title="Save">
+                            <span class="mdi mdi-bookmark-outline"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <form id="chatForm" class="chat-input">
+            <div class="input-group">
+                <button type="button" class="attach-btn" title="Attach file">
+                    <span class="mdi mdi-paperclip"></span>
+                </button>
+                <textarea name="message" placeholder="Type your message..." rows="1" required></textarea>
+                <button type="submit" class="send-btn" title="Send message">
+                    <span class="mdi mdi-send"></span>
+                </button>
+            </div>
+            <div class="input-actions">
+                <button type="button" class="action-btn" title="Clear chat">
+                    <span class="mdi mdi-delete"></span>
+                    Clear Chat
+                </button>
+                <button type="button" class="action-btn" title="Export chat">
+                    <span class="mdi mdi-download"></span>
+                    Export Chat
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+.chat-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--spacing-lg);
+    height: calc(100vh - 140px);
+    padding: var(--spacing-lg);
+}
+
+.chat-sidebar {
+    background-color: var(--secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.chat-options,
+.chat-history {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.option-group label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.option-group select,
+.option-group input[type="range"] {
+    width: 100%;
+    padding: var(--spacing-sm);
+    background-color: var(--primary);
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--text);
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-speed) var(--transition-ease);
+}
+
+.history-item:hover,
+.history-item.active {
+    background-color: var(--primary);
+}
+
+.history-item span.mdi {
+    font-size: 1.25rem;
+    color: var(--accent);
+}
+
+.history-content p {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.history-content small {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.chat-main {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: var(--spacing-lg);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    max-width: 80%;
+}
+
+.message-ai {
+    margin-right: auto;
+}
+
+.message-user {
+    margin-left: auto;
+    flex-direction: row-reverse;
+}
+
+.message span.mdi {
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.message-content {
+    background-color: var(--primary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    position: relative;
+}
+
+.message-user .message-content {
+    background-color: var(--accent);
+    color: var(--secondary);
+}
+
+.message-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+    opacity: 0;
+    transition: opacity var(--transition-speed) var(--transition-ease);
+}
+
+.message-content:hover .message-actions {
+    opacity: 1;
+}
+
+.action-btn {
+    padding: var(--spacing-xs);
+    font-size: 0.875rem;
+}
+
+.chat-input {
+    padding: var(--spacing-lg);
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.input-group {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--spacing-sm);
+}
+
+.input-group textarea {
+    flex: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--secondary);
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--text);
+    resize: none;
+    min-height: 40px;
+    max-height: 120px;
+}
+
+.attach-btn,
+.send-btn {
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    background-color: var(--secondary);
+}
+
+.send-btn {
+    background-color: var(--accent);
+    color: var(--secondary);
+}
+
+.input-actions {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .chat-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .chat-sidebar {
+        display: none;
+    }
+}
+</style>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const tempRange = document.getElementById('tempRange');
+    const tempValue = document.getElementById('tempValue');
+    const chatForm = document.getElementById('chatForm');
+    const chatMessages = document.getElementById('chatMessages');
+    const textarea = chatForm.querySelector('textarea');
+    
+    // Update temperature value display
+    tempRange.addEventListener('input', (e) => {
+        tempValue.textContent = e.target.value;
+    });
+    
+    // Auto-resize textarea
+    textarea.addEventListener('input', () => {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    });
+    
+    // Handle chat form submission
+    chatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const message = textarea.value.trim();
+        
+        if (message) {
+            // Add user message
+            appendMessage('user', message);
+            textarea.value = '';
+            textarea.style.height = 'auto';
+            
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message,
+                        model: document.getElementById('modelSelect').value,
+                        temperature: parseFloat(tempRange.value),
+                        context: document.getElementById('contextSelect').value
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    appendMessage('ai', data.response);
+                } else {
+                    throw new Error('Failed to get response');
+                }
+            } catch (error) {
+                console.error('Chat error:', error);
+                appendMessage('error', 'Sorry, something went wrong. Please try again.');
+            }
+        }
+    });
+    
+    // Handle message actions
+    chatMessages.addEventListener('click', (e) => {
+        const btn = e.target.closest('.action-btn');
+        if (!btn) return;
+        
+        const message = btn.closest('.message-content').querySelector('p').textContent;
+        
+        if (btn.title === 'Copy') {
+            navigator.clipboard.writeText(message)
+                .then(() => {
+                    btn.querySelector('span').classList.remove('mdi-content-copy');
+                    btn.querySelector('span').classList.add('mdi-check');
+                    setTimeout(() => {
+                        btn.querySelector('span').classList.remove('mdi-check');
+                        btn.querySelector('span').classList.add('mdi-content-copy');
+                    }, 2000);
+                })
+                .catch(console.error);
+        } else if (btn.title === 'Save') {
+            btn.querySelector('span').classList.toggle('mdi-bookmark-outline');
+            btn.querySelector('span').classList.toggle('mdi-bookmark');
+        }
+    });
+});
+
+function appendMessage(type, content) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', `message-${type}`, 'animate-fade-in');
+    
+    const iconSpan = document.createElement('span');
+    iconSpan.classList.add('mdi');
+    iconSpan.classList.add(type === 'user' ? 'mdi-account' : 'mdi-robot');
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.classList.add('message-content');
+    
+    const contentP = document.createElement('p');
+    contentP.textContent = content;
+    
+    const actionsDiv = document.createElement('div');
+    actionsDiv.classList.add('message-actions');
+    
+    if (type !== 'user') {
+        const copyBtn = document.createElement('button');
+        copyBtn.classList.add('action-btn');
+        copyBtn.title = 'Copy';
+        copyBtn.innerHTML = '<span class="mdi mdi-content-copy"></span>';
+        
+        const saveBtn = document.createElement('button');
+        saveBtn.classList.add('action-btn');
+        saveBtn.title = 'Save';
+        saveBtn.innerHTML = '<span class="mdi mdi-bookmark-outline"></span>';
+        
+        actionsDiv.appendChild(copyBtn);
+        actionsDiv.appendChild(saveBtn);
+    }
+    
+    contentDiv.appendChild(contentP);
+    contentDiv.appendChild(actionsDiv);
+    
+    messageDiv.appendChild(iconSpan);
+    messageDiv.appendChild(contentDiv);
+    
+    const chatMessages = document.getElementById('chatMessages');
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+</script>
+{% endblock %} 
