@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { HashRouter as Router } from 'react-router-dom';
 import ProfileHeader from './components/ProfileHeader';
 import SkillsRadarChart from './components/charts/SkillsRadarChart';
 import ProjectsSection from './components/sections/ProjectsSection';
@@ -30,80 +31,82 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>SantiSkills Dashboard</h1>
-        <div className="dashboard-controls">
-          <button 
-            className={`control-button ${activeSections.profile ? 'active' : ''}`}
-            onClick={() => toggleSection('profile')}
-          >
-            Profile
-          </button>
-          <button 
-            className={`control-button ${activeSections.skills ? 'active' : ''}`}
-            onClick={() => toggleSection('skills')}
-          >
-            Skills
-          </button>
-          <button 
-            className={`control-button ${activeSections.projects ? 'active' : ''}`}
-            onClick={() => toggleSection('projects')}
-          >
-            Projects
-          </button>
-          <button 
-            className={`control-button ${activeSections.experience ? 'active' : ''}`}
-            onClick={() => toggleSection('experience')}
-          >
-            Experience
-          </button>
-          <button 
-            className={`control-button ${activeSections.education ? 'active' : ''}`}
-            onClick={() => toggleSection('education')}
-          >
-            Education
-          </button>
-          <button 
-            className={`control-button ${activeSections.certifications ? 'active' : ''}`}
-            onClick={() => toggleSection('certifications')}
-          >
-            Certifications
-          </button>
-        </div>
-      </header>
-      
-      <main className="dashboard-container">
-        {activeSections.profile && <ProfileHeader />}
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <h1>SantiSkills Dashboard</h1>
+          <div className="dashboard-controls">
+            <button 
+              className={`control-button ${activeSections.profile ? 'active' : ''}`}
+              onClick={() => toggleSection('profile')}
+            >
+              Profile
+            </button>
+            <button 
+              className={`control-button ${activeSections.skills ? 'active' : ''}`}
+              onClick={() => toggleSection('skills')}
+            >
+              Skills
+            </button>
+            <button 
+              className={`control-button ${activeSections.projects ? 'active' : ''}`}
+              onClick={() => toggleSection('projects')}
+            >
+              Projects
+            </button>
+            <button 
+              className={`control-button ${activeSections.experience ? 'active' : ''}`}
+              onClick={() => toggleSection('experience')}
+            >
+              Experience
+            </button>
+            <button 
+              className={`control-button ${activeSections.education ? 'active' : ''}`}
+              onClick={() => toggleSection('education')}
+            >
+              Education
+            </button>
+            <button 
+              className={`control-button ${activeSections.certifications ? 'active' : ''}`}
+              onClick={() => toggleSection('certifications')}
+            >
+              Certifications
+            </button>
+          </div>
+        </header>
         
-        <div className="dashboard-grid">
-          {activeSections.skills && (
-            <div className="dashboard-item skills-item">
-              <SkillsRadarChart />
-            </div>
-          )}
+        <main className="dashboard-container">
+          {activeSections.profile && <ProfileHeader />}
           
-          {activeSections.languageUsage && (
-            <div className="dashboard-item language-item">
-              <LanguageUsageChart />
-            </div>
-          )}
-        </div>
+          <div className="dashboard-grid">
+            {activeSections.skills && (
+              <div className="dashboard-item skills-item">
+                <SkillsRadarChart />
+              </div>
+            )}
+            
+            {activeSections.languageUsage && (
+              <div className="dashboard-item language-item">
+                <LanguageUsageChart />
+              </div>
+            )}
+          </div>
+          
+          {activeSections.skillsTimeline && <SkillsTimelineChart />}
+          {activeSections.projects && <ProjectsSection />}
+          {activeSections.experience && <ExperienceSection />}
+          {activeSections.education && <EducationSection />}
+          {activeSections.certifications && <CertificationsSection />}
+        </main>
         
-        {activeSections.skillsTimeline && <SkillsTimelineChart />}
-        {activeSections.projects && <ProjectsSection />}
-        {activeSections.experience && <ExperienceSection />}
-        {activeSections.education && <EducationSection />}
-        {activeSections.certifications && <CertificationsSection />}
-      </main>
-      
-      <footer className="App-footer">
-        <p>&copy; 2023 Santiago Mauldin. All rights reserved.</p>
-      </footer>
-      
-      {/* Chatbot component */}
-      <Chatbot />
-    </div>
+        <footer className="App-footer">
+          <p>&copy; 2023 Santiago Mauldin. All rights reserved.</p>
+        </footer>
+        
+        {/* Chatbot component */}
+        <Chatbot />
+      </div>
+    </Router>
   );
 }
 
