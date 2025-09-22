@@ -22,3 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .env
+<<<<<<< HEAD
+=======
+node_modules/\ndist/\nbuild/\n.env*\n*.db\n*.sqlite*\nChatStorage/
+>>>>>>> 0b6ef113 (init: clean version of santiskills app)
