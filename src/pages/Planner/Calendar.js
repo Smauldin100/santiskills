@@ -96,28 +96,28 @@ const Calendar = () => {
     setSelectedEvent(null);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleDateChange = (name, value) => {
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = () => {
     if (selectedEvent) {
-      setEvents(prev => prev.map(event =>
-        event.id === selectedEvent.id
-          ? { ...formData, id: event.id }
-          : event
-      ));
+      setEvents(prev =>
+        prev.map(event =>
+          event.id === selectedEvent.id ? { ...formData, id: event.id } : event
+        )
+      );
     } else {
       const newEvent = {
         ...formData,
@@ -137,11 +137,11 @@ const Calendar = () => {
     handleOpenDialog();
   };
 
-  const handleSelectEvent = (event) => {
+  const handleSelectEvent = event => {
     handleOpenDialog(event);
   };
 
-  const eventStyleGetter = (event) => {
+  const eventStyleGetter = event => {
     const categoryColors = {
       Meeting: '#3174ad',
       Work: '#4caf50',
@@ -158,7 +158,14 @@ const Calendar = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 3,
+        }}
+      >
         <Typography variant="h4" component="h1">
           Calendar
         </Typography>
@@ -185,7 +192,12 @@ const Calendar = () => {
         />
       </Paper>
 
-      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        maxWidth="sm"
+        fullWidth
+      >
         <DialogTitle>
           {selectedEvent ? 'Edit Event' : 'Add New Event'}
         </DialogTitle>
@@ -204,7 +216,9 @@ const Calendar = () => {
               type="datetime-local"
               fullWidth
               value={format(formData.start, "yyyy-MM-dd'T'HH:mm")}
-              onChange={(e) => handleDateChange('start', new Date(e.target.value))}
+              onChange={e =>
+                handleDateChange('start', new Date(e.target.value))
+              }
               InputLabelProps={{ shrink: true }}
             />
             <TextField
@@ -213,7 +227,7 @@ const Calendar = () => {
               type="datetime-local"
               fullWidth
               value={format(formData.end, "yyyy-MM-dd'T'HH:mm")}
-              onChange={(e) => handleDateChange('end', new Date(e.target.value))}
+              onChange={e => handleDateChange('end', new Date(e.target.value))}
               InputLabelProps={{ shrink: true }}
             />
             <FormControl fullWidth>
@@ -243,4 +257,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar; 
+export default Calendar;

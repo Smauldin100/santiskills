@@ -7,7 +7,7 @@ import {
   Radar,
   Legend,
   ResponsiveContainer,
-  Tooltip
+  Tooltip,
 } from 'recharts';
 import { skillsData } from '../../data/personalData';
 import './SkillsRadarChart.css';
@@ -15,18 +15,23 @@ import './SkillsRadarChart.css';
 const SkillsRadarChart = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [filteredSkills, setFilteredSkills] = useState(skillsData);
-  
+
   // Extract unique categories
-  const categories = ['All', ...new Set(skillsData.map(skill => skill.category))];
-  
+  const categories = [
+    'All',
+    ...new Set(skillsData.map(skill => skill.category)),
+  ];
+
   useEffect(() => {
     if (selectedCategory === 'All') {
       setFilteredSkills(skillsData);
     } else {
-      setFilteredSkills(skillsData.filter(skill => skill.category === selectedCategory));
+      setFilteredSkills(
+        skillsData.filter(skill => skill.category === selectedCategory)
+      );
     }
   }, [selectedCategory]);
-  
+
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -56,7 +61,7 @@ const SkillsRadarChart = () => {
           ))}
         </div>
       </div>
-      
+
       <ResponsiveContainer width="100%" height={400}>
         <RadarChart data={filteredSkills}>
           <PolarGrid />
@@ -73,12 +78,15 @@ const SkillsRadarChart = () => {
           <Legend />
         </RadarChart>
       </ResponsiveContainer>
-      
+
       <div className="skills-legend">
         <h3>Skill Levels</h3>
         <div className="skill-levels">
           <div className="skill-level-item">
-            <span className="skill-level-color" style={{ backgroundColor: '#8884d8' }}></span>
+            <span
+              className="skill-level-color"
+              style={{ backgroundColor: '#8884d8' }}
+            ></span>
             <span className="skill-level-text">Skill Proficiency (0-100)</span>
           </div>
         </div>
@@ -87,4 +95,4 @@ const SkillsRadarChart = () => {
   );
 };
 
-export default SkillsRadarChart; 
+export default SkillsRadarChart;

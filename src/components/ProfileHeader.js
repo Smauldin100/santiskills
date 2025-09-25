@@ -31,13 +31,28 @@ const ProfileHeader = () => {
             </div>
           </div>
           <div className="profile-links">
-            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="profile-link">
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="profile-link"
+            >
               GitHub
             </a>
-            <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="profile-link">
+            <a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="profile-link"
+            >
               LinkedIn
             </a>
-            <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" className="profile-link">
+            <a
+              href={personalInfo.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="profile-link"
+            >
               Website
             </a>
           </div>
@@ -47,4 +62,4 @@ const ProfileHeader = () => {
   );
 };
 
-export default ProfileHeader; 
+export default ProfileHeader;

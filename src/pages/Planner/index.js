@@ -15,4 +15,4 @@ const Planner = () => {
   );
 };
 
-export default Planner; 
+export default Planner;

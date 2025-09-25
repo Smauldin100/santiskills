@@ -30,7 +30,8 @@ const notifications = [
     id: 1,
     type: 'task',
     title: 'New Task Assigned',
-    message: 'You have been assigned a new task: "Complete Project Documentation"',
+    message:
+      'You have been assigned a new task: "Complete Project Documentation"',
     time: '2 hours ago',
     read: false,
   },
@@ -68,11 +69,13 @@ const Notifications = () => {
     setTabValue(newValue);
   };
 
-  const handleDeleteNotification = (id) => {
-    setNotificationList(prev => prev.filter(notification => notification.id !== id));
+  const handleDeleteNotification = id => {
+    setNotificationList(prev =>
+      prev.filter(notification => notification.id !== id)
+    );
   };
 
-  const getNotificationIcon = (type) => {
+  const getNotificationIcon = type => {
     switch (type) {
       case 'task':
         return <TaskIcon />;
@@ -87,7 +90,7 @@ const Notifications = () => {
     }
   };
 
-  const getNotificationColor = (type) => {
+  const getNotificationColor = type => {
     switch (type) {
       case 'task':
         return 'primary';
@@ -116,11 +119,7 @@ const Notifications = () => {
 
       <Card>
         <CardContent>
-          <Tabs
-            value={tabValue}
-            onChange={handleTabChange}
-            sx={{ mb: 2 }}
-          >
+          <Tabs value={tabValue} onChange={handleTabChange} sx={{ mb: 2 }}>
             <Tab label="All" />
             <Tab label="Unread" />
             <Tab label="Read" />
@@ -137,13 +136,19 @@ const Notifications = () => {
                   }}
                 >
                   <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: `${getNotificationColor(notification.type)}.main` }}>
+                    <Avatar
+                      sx={{
+                        bgcolor: `${getNotificationColor(notification.type)}.main`,
+                      }}
+                    >
                       {getNotificationIcon(notification.type)}
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
                     primary={
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Box
+                        sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+                      >
                         <Typography variant="subtitle1">
                           {notification.title}
                         </Typography>
@@ -209,4 +214,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications; 
+export default Notifications;

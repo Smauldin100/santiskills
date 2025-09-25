@@ -10,7 +10,7 @@ import {
   Box,
   InputBase,
   Avatar,
-  Tooltip
+  Tooltip,
 } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 import {
@@ -20,7 +20,7 @@ import {
   Mail as MailIcon,
   AccountCircle,
   Settings as SettingsIcon,
-  ExitToApp as LogoutIcon
+  ExitToApp as LogoutIcon,
 } from '@mui/icons-material';
 
 const Search = styled('div')(({ theme }) => ({
@@ -67,15 +67,15 @@ const Header = ({ open, onSidebarToggle }) => {
   const [notificationsAnchorEl, setNotificationsAnchorEl] = useState(null);
   const [messagesAnchorEl, setMessagesAnchorEl] = useState(null);
 
-  const handleProfileMenuOpen = (event) => {
+  const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleNotificationsMenuOpen = (event) => {
+  const handleNotificationsMenuOpen = event => {
     setNotificationsAnchorEl(event.currentTarget);
   };
 
-  const handleMessagesMenuOpen = (event) => {
+  const handleMessagesMenuOpen = event => {
     setMessagesAnchorEl(event.currentTarget);
   };
 
@@ -86,13 +86,13 @@ const Header = ({ open, onSidebarToggle }) => {
   };
 
   return (
-    <AppBar 
-      position="fixed" 
-      sx={{ 
-        zIndex: (theme) => theme.zIndex.drawer + 1,
+    <AppBar
+      position="fixed"
+      sx={{
+        zIndex: theme => theme.zIndex.drawer + 1,
         backgroundColor: 'background.paper',
         color: 'text.primary',
-        boxShadow: 1
+        boxShadow: 1,
       }}
     >
       <Toolbar>
@@ -129,10 +129,7 @@ const Header = ({ open, onSidebarToggle }) => {
 
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Tooltip title="Messages">
-            <IconButton 
-              color="inherit"
-              onClick={handleMessagesMenuOpen}
-            >
+            <IconButton color="inherit" onClick={handleMessagesMenuOpen}>
               <Badge badgeContent={4} color="error">
                 <MailIcon />
               </Badge>
@@ -140,10 +137,7 @@ const Header = ({ open, onSidebarToggle }) => {
           </Tooltip>
 
           <Tooltip title="Notifications">
-            <IconButton
-              color="inherit"
-              onClick={handleNotificationsMenuOpen}
-            >
+            <IconButton color="inherit" onClick={handleNotificationsMenuOpen}>
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
@@ -156,11 +150,11 @@ const Header = ({ open, onSidebarToggle }) => {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <Avatar 
-                sx={{ 
-                  width: 32, 
+              <Avatar
+                sx={{
+                  width: 32,
                   height: 32,
-                  bgcolor: 'primary.main'
+                  bgcolor: 'primary.main',
                 }}
               >
                 <AccountCircle />
@@ -223,4 +217,4 @@ const Header = ({ open, onSidebarToggle }) => {
   );
 };
 
-export default Header; 
+export default Header;

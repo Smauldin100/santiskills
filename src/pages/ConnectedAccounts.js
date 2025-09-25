@@ -26,9 +26,19 @@ import {
 const ConnectedAccounts = () => {
   const [connectedServices, setConnectedServices] = useState([
     { id: 'google', name: 'Google', icon: <GoogleIcon />, connected: true },
-    { id: 'microsoft', name: 'Microsoft', icon: <MicrosoftIcon />, connected: true },
+    {
+      id: 'microsoft',
+      name: 'Microsoft',
+      icon: <MicrosoftIcon />,
+      connected: true,
+    },
     { id: 'apple', name: 'Apple', icon: <AppleIcon />, connected: false },
-    { id: 'linkedin', name: 'LinkedIn', icon: <LinkedInIcon />, connected: false },
+    {
+      id: 'linkedin',
+      name: 'LinkedIn',
+      icon: <LinkedInIcon />,
+      connected: false,
+    },
     { id: 'github', name: 'GitHub', icon: <GitHubIcon />, connected: false },
   ]);
 
@@ -37,21 +47,21 @@ const ConnectedAccounts = () => {
     service: null,
   });
 
-  const handleConnect = (serviceId) => {
-    setConnectedServices((prev) =>
-      prev.map((service) =>
+  const handleConnect = serviceId => {
+    setConnectedServices(prev =>
+      prev.map(service =>
         service.id === serviceId ? { ...service, connected: true } : service
       )
     );
   };
 
-  const handleDisconnectClick = (service) => {
+  const handleDisconnectClick = service => {
     setDisconnectDialog({ open: true, service });
   };
 
   const handleDisconnectConfirm = () => {
-    setConnectedServices((prev) =>
-      prev.map((service) =>
+    setConnectedServices(prev =>
+      prev.map(service =>
         service.id === disconnectDialog.service.id
           ? { ...service, connected: false }
           : service
@@ -74,7 +84,7 @@ const ConnectedAccounts = () => {
       </Typography>
 
       <Grid container spacing={3}>
-        {connectedServices.map((service) => (
+        {connectedServices.map(service => (
           <Grid item xs={12} sm={6} md={4} key={service.id}>
             <Card>
               <CardContent>
@@ -121,15 +131,12 @@ const ConnectedAccounts = () => {
         ))}
       </Grid>
 
-      <Dialog
-        open={disconnectDialog.open}
-        onClose={handleDisconnectCancel}
-      >
+      <Dialog open={disconnectDialog.open} onClose={handleDisconnectCancel}>
         <DialogTitle>Disconnect Service</DialogTitle>
         <DialogContent>
           <Typography>
-            Are you sure you want to disconnect {disconnectDialog.service?.name}?
-            This will stop syncing data from this service.
+            Are you sure you want to disconnect {disconnectDialog.service?.name}
+            ? This will stop syncing data from this service.
           </Typography>
         </DialogContent>
         <DialogActions>
@@ -143,4 +150,4 @@ const ConnectedAccounts = () => {
   );
 };
 
-export default ConnectedAccounts; 
+export default ConnectedAccounts;

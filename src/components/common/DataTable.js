@@ -14,13 +14,13 @@ import {
   IconButton,
   Tooltip,
   Typography,
-  Chip
+  Chip,
 } from '@mui/material';
 import {
   Edit as EditIcon,
   Delete as DeleteIcon,
   Visibility as ViewIcon,
-  FilterList as FilterIcon
+  FilterList as FilterIcon,
 } from '@mui/icons-material';
 
 const DataTable = ({
@@ -33,7 +33,7 @@ const DataTable = ({
   showActions = true,
   showFilters = true,
   rowsPerPageOptions = [5, 10, 25],
-  defaultRowsPerPage = 10
+  defaultRowsPerPage = 10,
 }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(defaultRowsPerPage);
@@ -42,7 +42,7 @@ const DataTable = ({
   const [filters, setFilters] = useState({});
   const [showFilterRow, setShowFilterRow] = useState(false);
 
-  const handleRequestSort = (property) => {
+  const handleRequestSort = property => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -52,7 +52,7 @@ const DataTable = ({
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -60,7 +60,7 @@ const DataTable = ({
   const handleFilterChange = (column, value) => {
     setFilters(prev => ({
       ...prev,
-      [column]: value
+      [column]: value,
     }));
     setPage(0);
   };
@@ -92,7 +92,14 @@ const DataTable = ({
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden', mb: 2 }}>
-      <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Box
+        sx={{
+          p: 2,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
         <Typography variant="h6" component="div">
           {title}
         </Typography>
@@ -108,7 +115,7 @@ const DataTable = ({
         <Table stickyHeader>
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map(column => (
                 <TableCell
                   key={column.id}
                   align={column.numeric ? 'right' : 'left'}
@@ -127,13 +134,15 @@ const DataTable = ({
             </TableRow>
             {showFilterRow && (
               <TableRow>
-                {columns.map((column) => (
+                {columns.map(column => (
                   <TableCell key={`filter-${column.id}`}>
                     <TextField
                       size="small"
                       placeholder={`Filter ${column.label}`}
                       value={filters[column.id] || ''}
-                      onChange={(e) => handleFilterChange(column.id, e.target.value)}
+                      onChange={e =>
+                        handleFilterChange(column.id, e.target.value)
+                      }
                       fullWidth
                     />
                   </TableCell>
@@ -145,25 +154,35 @@ const DataTable = ({
           <TableBody>
             {paginatedData.map((row, index) => (
               <TableRow hover key={row.id || index}>
-                {columns.map((column) => (
-                  <TableCell 
+                {columns.map(column => (
+                  <TableCell
                     key={`${row.id}-${column.id}`}
                     align={column.numeric ? 'right' : 'left'}
                   >
-                    {column.render ? column.render(row[column.id], row) : (
-                      column.type === 'status' ? (
-                        <Chip 
-                          label={row[column.id]} 
-                          color={column.getStatusColor?.(row[column.id]) || 'default'}
-                          size="small"
-                        />
-                      ) : row[column.id]
+                    {column.render ? (
+                      column.render(row[column.id], row)
+                    ) : column.type === 'status' ? (
+                      <Chip
+                        label={row[column.id]}
+                        color={
+                          column.getStatusColor?.(row[column.id]) || 'default'
+                        }
+                        size="small"
+                      />
+                    ) : (
+                      row[column.id]
                     )}
                   </TableCell>
                 ))}
                 {showActions && (
                   <TableCell align="right">
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        gap: 1,
+                      }}
+                    >
                       {onView && (
                         <Tooltip title="View">
                           <IconButton size="small" onClick={() => onView(row)}>
@@ -180,7 +199,10 @@ const DataTable = ({
                       )}
                       {onDelete && (
                         <Tooltip title="Delete">
-                          <IconButton size="small" onClick={() => onDelete(row)}>
+                          <IconButton
+                            size="small"
+                            onClick={() => onDelete(row)}
+                          >
                             <DeleteIcon fontSize="small" />
                           </IconButton>
                         </Tooltip>
@@ -192,7 +214,7 @@ const DataTable = ({
             ))}
             {paginatedData.length === 0 && (
               <TableRow>
-                <TableCell 
+                <TableCell
                   colSpan={columns.length + (showActions ? 1 : 0)}
                   align="center"
                 >
@@ -216,4 +238,4 @@ const DataTable = ({
   );
 };
 
-export default DataTable; 
+export default DataTable;

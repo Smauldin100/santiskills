@@ -3,7 +3,7 @@ import './DataTable.css';
 
 /**
  * A reusable DataTable component with sorting and action buttons
- * 
+ *
  * @param {Object} props Component props
  * @param {Array} props.columns Array of column definitions with {id, label, sortable}
  * @param {Array} props.data Array of data objects
@@ -11,34 +11,34 @@ import './DataTable.css';
  * @param {string} props.title Table title
  * @param {function} props.onRowClick Function to call when a row is clicked
  */
-const DataTable = ({ 
-  columns, 
-  data = [], 
-  actions = {}, 
-  title = '', 
+const DataTable = ({
+  columns,
+  data = [],
+  actions = {},
+  title = '',
   onRowClick = null,
-  emptyMessage = 'No data available' 
+  emptyMessage = 'No data available',
 }) => {
   const [sortConfig, setSortConfig] = useState({
     key: null,
-    direction: 'asc'
+    direction: 'asc',
   });
 
   // Handle sorting
-  const handleSort = (columnId) => {
+  const handleSort = columnId => {
     let direction = 'asc';
-    
+
     if (sortConfig.key === columnId && sortConfig.direction === 'asc') {
       direction = 'desc';
     }
-    
+
     setSortConfig({ key: columnId, direction });
   };
 
   // Sort data based on current sort configuration
   const sortedData = useMemo(() => {
     if (!sortConfig.key) return data;
-    
+
     return [...data].sort((a, b) => {
       if (a[sortConfig.key] < b[sortConfig.key]) {
         return sortConfig.direction === 'asc' ? -1 : 1;
@@ -50,7 +50,7 @@ const DataTable = ({
     });
   }, [data, sortConfig]);
 
-  const getSortIndicator = (columnId) => {
+  const getSortIndicator = columnId => {
     if (sortConfig.key !== columnId) return null;
     return sortConfig.direction === 'asc' ? ' ↑' : ' ↓';
   };
@@ -72,9 +72,11 @@ const DataTable = ({
           <thead>
             <tr>
               {columns.map(column => (
-                <th 
+                <th
                   key={column.id}
-                  onClick={column.sortable ? () => handleSort(column.id) : undefined}
+                  onClick={
+                    column.sortable ? () => handleSort(column.id) : undefined
+                  }
                   className={column.sortable ? 'sortable' : ''}
                 >
                   {column.label}
@@ -88,8 +90,8 @@ const DataTable = ({
           </thead>
           <tbody>
             {sortedData.map((row, index) => (
-              <tr 
-                key={row.id || index} 
+              <tr
+                key={row.id || index}
                 onClick={onRowClick ? () => onRowClick(row) : undefined}
                 className={onRowClick ? 'clickable' : ''}
               >
@@ -101,9 +103,9 @@ const DataTable = ({
                 {(actions.edit || actions.delete || actions.view) && (
                   <td className="actions-cell">
                     {actions.view && (
-                      <button 
+                      <button
                         className="btn btn-secondary action-btn"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.stopPropagation();
                           actions.view(row);
                         }}
@@ -112,9 +114,9 @@ const DataTable = ({
                       </button>
                     )}
                     {actions.edit && (
-                      <button 
+                      <button
                         className="btn btn-primary action-btn"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.stopPropagation();
                           actions.edit(row);
                         }}
@@ -123,9 +125,9 @@ const DataTable = ({
                       </button>
                     )}
                     {actions.delete && (
-                      <button 
+                      <button
                         className="btn btn-danger action-btn"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.stopPropagation();
                           actions.delete(row);
                         }}
@@ -144,4 +146,4 @@ const DataTable = ({
   );
 };
 
-export default DataTable; 
+export default DataTable;

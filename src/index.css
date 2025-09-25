@@ -5,9 +5,46 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: radial-gradient(1200px 800px at 80% 100%, rgba(33, 147, 176, 0.20), rgba(108, 92, 231, 0.08) 45%, transparent 70%), #0f1115;
+  color: #e6e9ef;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --neo-primary: #20c9ff;
+  --neo-secondary: #6c5ce7;
+  --neo-accent: #00e5ff;
+  --neo-surface: rgba(255,255,255,0.06);
+  --neo-border: rgba(255,255,255,0.12);
+  --neo-card: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+}
+
+.glass {
+  background: var(--neo-card);
+  border: 1px solid var(--neo-border);
+  backdrop-filter: blur(12px) saturate(140%);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.glow {
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.25);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #20c9ff, #6c5ce7 60%, #a29bfe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.neo-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neo-border), transparent);
+}
+
+.motion-fade-up { animation: fadeUp .35s ease-out; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }

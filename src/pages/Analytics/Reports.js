@@ -57,7 +57,7 @@ const Reports = () => {
           <Select
             value={timeRange}
             label="Time Range"
-            onChange={(e) => setTimeRange(e.target.value)}
+            onChange={e => setTimeRange(e.target.value)}
           >
             <MenuItem value="day">Today</MenuItem>
             <MenuItem value="week">This Week</MenuItem>
@@ -83,7 +83,11 @@ const Reports = () => {
                     <Tooltip />
                     <Legend />
                     <Bar dataKey="tasks" name="Total Tasks" fill="#8884d8" />
-                    <Bar dataKey="completed" name="Completed Tasks" fill="#82ca9d" />
+                    <Bar
+                      dataKey="completed"
+                      name="Completed Tasks"
+                      fill="#82ca9d"
+                    />
                   </BarChart>
                 </ResponsiveContainer>
               </Box>
@@ -106,7 +110,7 @@ const Reports = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {skillProgress.map((skill) => (
+                    {skillProgress.map(skill => (
                       <TableRow key={skill.skill}>
                         <TableCell component="th" scope="row">
                           {skill.skill}
@@ -163,4 +167,4 @@ const Reports = () => {
   );
 };
 
-export default Reports; 
+export default Reports;

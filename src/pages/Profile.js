@@ -82,11 +82,11 @@ const Profile = () => {
     setOpenDialog(false);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     setProfileData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -123,9 +123,7 @@ const Profile = () => {
                   </Typography>
                 </Box>
               </Box>
-              <Typography variant="body1">
-                {profileData.bio}
-              </Typography>
+              <Typography variant="body1">{profileData.bio}</Typography>
             </CardContent>
           </Card>
         </Grid>
@@ -134,14 +132,24 @@ const Profile = () => {
         <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                sx={{ display: 'flex', alignItems: 'center' }}
+              >
                 <SchoolIcon sx={{ mr: 1 }} />
                 Skills
               </Typography>
               <Box sx={{ mt: 2 }}>
                 {profileData.skills.map((skill, index) => (
                   <Box key={index} sx={{ mb: 2 }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        mb: 1,
+                      }}
+                    >
                       <Typography variant="body2">{skill.name}</Typography>
                       <Typography variant="body2" color="textSecondary">
                         {skill.level}%
@@ -163,7 +171,11 @@ const Profile = () => {
         <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                sx={{ display: 'flex', alignItems: 'center' }}
+              >
                 <StarIcon sx={{ mr: 1 }} />
                 Achievements
               </Typography>
@@ -179,7 +191,11 @@ const Profile = () => {
                       primary={achievement.title}
                       secondary={
                         <>
-                          <Typography component="span" variant="body2" color="textSecondary">
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            color="textSecondary"
+                          >
                             {achievement.date}
                           </Typography>
                           <br />
@@ -198,7 +214,11 @@ const Profile = () => {
         <Grid item xs={12}>
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                sx={{ display: 'flex', alignItems: 'center' }}
+              >
                 <TimelineIcon sx={{ mr: 1 }} />
                 Recent Activity
               </Typography>
@@ -207,15 +227,30 @@ const Profile = () => {
                   <React.Fragment key={index}>
                     <ListItem>
                       <ListItemAvatar>
-                        <Avatar sx={{ bgcolor: activity.type === 'Task' ? 'success.main' : 'info.main' }}>
-                          {activity.type === 'Task' ? <WorkIcon /> : <SchoolIcon />}
+                        <Avatar
+                          sx={{
+                            bgcolor:
+                              activity.type === 'Task'
+                                ? 'success.main'
+                                : 'info.main',
+                          }}
+                        >
+                          {activity.type === 'Task' ? (
+                            <WorkIcon />
+                          ) : (
+                            <SchoolIcon />
+                          )}
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText
                         primary={activity.title}
                         secondary={
                           <>
-                            <Typography component="span" variant="body2" color="textSecondary">
+                            <Typography
+                              component="span"
+                              variant="body2"
+                              color="textSecondary"
+                            >
                               {activity.date}
                             </Typography>
                             <br />
@@ -224,7 +259,9 @@ const Profile = () => {
                         }
                       />
                     </ListItem>
-                    {index < profileData.recentActivity.length - 1 && <Divider />}
+                    {index < profileData.recentActivity.length - 1 && (
+                      <Divider />
+                    )}
                   </React.Fragment>
                 ))}
               </List>
@@ -234,7 +271,12 @@ const Profile = () => {
       </Grid>
 
       {/* Edit Profile Dialog */}
-      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        maxWidth="sm"
+        fullWidth
+      >
         <DialogTitle>Edit Profile</DialogTitle>
         <DialogContent>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 2 }}>
@@ -288,4 +330,4 @@ const Profile = () => {
   );
 };
 
-export default Profile; 
+export default Profile;

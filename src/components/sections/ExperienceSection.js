@@ -6,11 +6,11 @@ const ExperienceSection = () => {
   return (
     <div className="experience-section">
       <h2>Work Experience</h2>
-      
+
       <div className="timeline">
         {experienceData.map((experience, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}
           >
             <div className="timeline-content">
@@ -26,11 +26,11 @@ const ExperienceSection = () => {
             </div>
           </div>
         ))}
-        
+
         <div className="timeline-line"></div>
       </div>
     </div>
   );
 };
 
-export default ExperienceSection; 
+export default ExperienceSection;

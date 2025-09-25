@@ -142,9 +142,15 @@ const Performance = () => {
                 Skills Progress
               </Typography>
               <Box sx={{ mt: 2 }}>
-                {skillsData.map((skill) => (
+                {skillsData.map(skill => (
                   <Box key={skill.name} sx={{ mb: 2 }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        mb: 1,
+                      }}
+                    >
                       <Typography variant="body1">{skill.name}</Typography>
                       <Typography variant="body2" color="textSecondary">
                         {skill.progress}%
@@ -204,4 +210,4 @@ const Performance = () => {
   );
 };
 
-export default Performance; 
+export default Performance;

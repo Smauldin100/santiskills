@@ -6,7 +6,7 @@ const CertificationsSection = () => {
   return (
     <div className="certifications-section">
       <h2>Certifications</h2>
-      
+
       <div className="certifications-grid">
         {certificationsData.map((certification, index) => (
           <div key={index} className="certification-card">
@@ -16,9 +16,13 @@ const CertificationsSection = () => {
             <div className="certification-details">
               <h3>{certification.name}</h3>
               <div className="certification-meta">
-                <span className="certification-issuer">{certification.issuer}</span>
+                <span className="certification-issuer">
+                  {certification.issuer}
+                </span>
                 <div className="certification-dates">
-                  <span className="certification-date">Issued: {certification.date}</span>
+                  <span className="certification-date">
+                    Issued: {certification.date}
+                  </span>
                   {certification.expiry && (
                     <span className="certification-expiry">
                       Expires: {certification.expiry}
@@ -39,4 +43,4 @@ const CertificationsSection = () => {
   );
 };
 
-export default CertificationsSection; 
+export default CertificationsSection;

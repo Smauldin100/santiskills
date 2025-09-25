@@ -98,21 +98,21 @@ const Goals = () => {
     setSelectedGoal(null);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = () => {
     if (selectedGoal) {
-      setGoals(prev => prev.map(goal =>
-        goal.id === selectedGoal.id
-          ? { ...formData, id: goal.id }
-          : goal
-      ));
+      setGoals(prev =>
+        prev.map(goal =>
+          goal.id === selectedGoal.id ? { ...formData, id: goal.id } : goal
+        )
+      );
     } else {
       const newGoal = {
         ...formData,
@@ -123,28 +123,30 @@ const Goals = () => {
     handleCloseDialog();
   };
 
-  const handleDeleteGoal = (goalId) => {
+  const handleDeleteGoal = goalId => {
     setGoals(prev => prev.filter(goal => goal.id !== goalId));
   };
 
   const handleProgressUpdate = (goalId, newProgress) => {
-    setGoals(prev => prev.map(goal => {
-      if (goal.id === goalId) {
-        const updatedProgress = Math.min(100, Math.max(0, newProgress));
-        const status = updatedProgress === 100 ? 'Completed' : 'In Progress';
-        return { ...goal, progress: updatedProgress, status };
-      }
-      return goal;
-    }));
+    setGoals(prev =>
+      prev.map(goal => {
+        if (goal.id === goalId) {
+          const updatedProgress = Math.min(100, Math.max(0, newProgress));
+          const status = updatedProgress === 100 ? 'Completed' : 'In Progress';
+          return { ...goal, progress: updatedProgress, status };
+        }
+        return goal;
+      })
+    );
   };
 
-  const getProgressColor = (progress) => {
+  const getProgressColor = progress => {
     if (progress < 30) return 'error';
     if (progress < 70) return 'warning';
     return 'success';
   };
 
-  const getPriorityColor = (priority) => {
+  const getPriorityColor = priority => {
     const colors = {
       High: '#f44336',
       Medium: '#ff9800',
@@ -155,7 +157,14 @@ const Goals = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 3,
+        }}
+      >
         <Typography variant="h4" component="h1">
           Goals
         </Typography>
@@ -169,22 +178,35 @@ const Goals = () => {
       </Box>
 
       <Grid container spacing={3}>
-        {goals.map((goal) => (
+        {goals.map(goal => (
           <Grid item xs={12} md={6} lg={4} key={goal.id}>
             <Card>
               <CardContent>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    mb: 2,
+                  }}
+                >
                   <Typography variant="h6" component="h2" sx={{ flex: 1 }}>
                     {goal.title}
                   </Typography>
                   <Box>
                     <Tooltip title="Edit">
-                      <IconButton size="small" onClick={() => handleOpenDialog(goal)}>
+                      <IconButton
+                        size="small"
+                        onClick={() => handleOpenDialog(goal)}
+                      >
                         <EditIcon />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Delete">
-                      <IconButton size="small" onClick={() => handleDeleteGoal(goal.id)}>
+                      <IconButton
+                        size="small"
+                        onClick={() => handleDeleteGoal(goal.id)}
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </Tooltip>
@@ -204,7 +226,9 @@ const Goals = () => {
                   </Typography>
                 </Box>
 
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                <Box
+                  sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}
+                >
                   <Typography variant="body2">
                     Progress: {goal.progress}%
                   </Typography>
@@ -226,14 +250,18 @@ const Goals = () => {
                   <Box>
                     <IconButton
                       size="small"
-                      onClick={() => handleProgressUpdate(goal.id, goal.progress - 10)}
+                      onClick={() =>
+                        handleProgressUpdate(goal.id, goal.progress - 10)
+                      }
                       disabled={goal.progress <= 0}
                     >
                       -
                     </IconButton>
                     <IconButton
                       size="small"
-                      onClick={() => handleProgressUpdate(goal.id, goal.progress + 10)}
+                      onClick={() =>
+                        handleProgressUpdate(goal.id, goal.progress + 10)
+                      }
                       disabled={goal.progress >= 100}
                     >
                       +
@@ -246,10 +274,13 @@ const Goals = () => {
         ))}
       </Grid>
 
-      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
-        <DialogTitle>
-          {selectedGoal ? 'Edit Goal' : 'Add New Goal'}
-        </DialogTitle>
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>{selectedGoal ? 'Edit Goal' : 'Add New Goal'}</DialogTitle>
         <DialogContent>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 2 }}>
             <TextField
@@ -326,4 +357,4 @@ const Goals = () => {
   );
 };
 
-export default Goals; 
+export default Goals;

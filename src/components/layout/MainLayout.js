@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import {
-  Box,
-  CssBaseline,
-  useMediaQuery,
-  useTheme
-} from '@mui/material';
+import { Box, CssBaseline, useMediaQuery, useTheme } from '@mui/material';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import { Outlet } from 'react-router-dom';
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
+const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -26,7 +21,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       }),
       marginLeft: 240,
     }),
-  }),
+  })
 );
 
 const MainLayout = () => {
@@ -41,11 +36,8 @@ const MainLayout = () => {
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       <CssBaseline />
-      <Header 
-        open={sidebarOpen}
-        onSidebarToggle={handleSidebarToggle}
-      />
-      <Sidebar 
+      <Header open={sidebarOpen} onSidebarToggle={handleSidebarToggle} />
+      <Sidebar
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         variant={isMobile ? 'temporary' : 'permanent'}
@@ -59,4 +51,4 @@ const MainLayout = () => {
   );
 };
 
-export default MainLayout; 
+export default MainLayout;

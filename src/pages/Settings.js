@@ -48,7 +48,7 @@ const Settings = () => {
     },
   });
 
-  const handleNotificationChange = (setting) => {
+  const handleNotificationChange = setting => {
     setSettings(prev => ({
       ...prev,
       notifications: {
@@ -68,14 +68,14 @@ const Settings = () => {
     }));
   };
 
-  const handleLanguageChange = (event) => {
+  const handleLanguageChange = event => {
     setSettings(prev => ({
       ...prev,
       language: event.target.value,
     }));
   };
 
-  const handleTimezoneChange = (event) => {
+  const handleTimezoneChange = event => {
     setSettings(prev => ({
       ...prev,
       timezone: event.target.value,
@@ -190,7 +190,9 @@ const Settings = () => {
                   <ListItemSecondaryAction>
                     <Select
                       value={settings.appearance.theme}
-                      onChange={(e) => handleAppearanceChange('theme', e.target.value)}
+                      onChange={e =>
+                        handleAppearanceChange('theme', e.target.value)
+                      }
                       size="small"
                     >
                       <MenuItem value="light">Light</MenuItem>
@@ -208,7 +210,9 @@ const Settings = () => {
                   <ListItemSecondaryAction>
                     <Select
                       value={settings.appearance.fontSize}
-                      onChange={(e) => handleAppearanceChange('fontSize', e.target.value)}
+                      onChange={e =>
+                        handleAppearanceChange('fontSize', e.target.value)
+                      }
                       size="small"
                     >
                       <MenuItem value="small">Small</MenuItem>
@@ -227,7 +231,9 @@ const Settings = () => {
                     <Switch
                       edge="end"
                       checked={settings.appearance.compactMode}
-                      onChange={(e) => handleAppearanceChange('compactMode', e.target.checked)}
+                      onChange={e =>
+                        handleAppearanceChange('compactMode', e.target.checked)
+                      }
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -304,7 +310,9 @@ const Settings = () => {
                     <Switch
                       edge="end"
                       checked={settings.storage.autoBackup}
-                      onChange={(e) => handleStorageChange('autoBackup', e.target.checked)}
+                      onChange={e =>
+                        handleStorageChange('autoBackup', e.target.checked)
+                      }
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -317,7 +325,9 @@ const Settings = () => {
                   <ListItemSecondaryAction>
                     <Select
                       value={settings.storage.backupFrequency}
-                      onChange={(e) => handleStorageChange('backupFrequency', e.target.value)}
+                      onChange={e =>
+                        handleStorageChange('backupFrequency', e.target.value)
+                      }
                       size="small"
                     >
                       <MenuItem value="daily">Daily</MenuItem>
@@ -345,4 +355,4 @@ const Settings = () => {
   );
 };
 
-export default Settings; 
+export default Settings;

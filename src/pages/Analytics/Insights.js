@@ -25,7 +25,8 @@ const Insights = () => {
       type: 'positive',
       icon: <TrendingUpIcon color="success" />,
       title: 'Productivity Improvement',
-      description: 'Your productivity has increased by 15% compared to last week',
+      description:
+        'Your productivity has increased by 15% compared to last week',
       metrics: ['Tasks completed: +20%', 'Response time: -25%'],
     },
     {
@@ -39,7 +40,7 @@ const Insights = () => {
       type: 'success',
       icon: <CheckCircleIcon color="success" />,
       title: 'Achievement',
-      description: 'You\'ve maintained a 90% task completion rate for 3 weeks',
+      description: "You've maintained a 90% task completion rate for 3 weeks",
       metrics: ['Weekly completion: 90%', 'Streak: 21 days'],
     },
     {
@@ -82,7 +83,13 @@ const Insights = () => {
                       <ListItemIcon>{insight.icon}</ListItemIcon>
                       <ListItemText
                         primary={
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 1,
+                            }}
+                          >
                             <Typography variant="subtitle1">
                               {insight.title}
                             </Typography>
@@ -148,4 +155,4 @@ const Insights = () => {
   );
 };
 
-export default Insights; 
+export default Insights;

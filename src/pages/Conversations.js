@@ -43,7 +43,7 @@ const conversations = [
   {
     id: 3,
     name: 'Team Channel',
-    lastMessage: 'Meeting notes from today\'s sync',
+    lastMessage: "Meeting notes from today's sync",
     time: '12:00 PM',
     unread: 5,
     avatar: '/path-to-avatar-3.jpg',
@@ -68,14 +68,16 @@ const messages = [
   {
     id: 3,
     sender: 'John Doe',
-    message: 'That\'s awesome! Can you share the details?',
+    message: "That's awesome! Can you share the details?",
     time: '2:32 PM',
     isOwn: false,
   },
 ];
 
 const Conversations = () => {
-  const [selectedConversation, setSelectedConversation] = useState(conversations[0]);
+  const [selectedConversation, setSelectedConversation] = useState(
+    conversations[0]
+  );
   const [messageList, setMessageList] = useState(messages);
   const [newMessage, setNewMessage] = useState('');
 
@@ -85,7 +87,10 @@ const Conversations = () => {
         id: messageList.length + 1,
         sender: 'You',
         message: newMessage,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        time: new Date().toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+        }),
         isOwn: true,
       };
       setMessageList(prev => [...prev, message]);
@@ -93,7 +98,7 @@ const Conversations = () => {
     }
   };
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = event => {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       handleSendMessage();
@@ -112,7 +117,9 @@ const Conversations = () => {
                   fullWidth
                   placeholder="Search conversations..."
                   InputProps={{
-                    startAdornment: <SearchIcon sx={{ mr: 1, color: 'text.secondary' }} />,
+                    startAdornment: (
+                      <SearchIcon sx={{ mr: 1, color: 'text.secondary' }} />
+                    ),
                   }}
                 />
               </Box>
@@ -130,7 +137,12 @@ const Conversations = () => {
                       </ListItemAvatar>
                       <ListItemText
                         primary={
-                          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                            }}
+                          >
                             <Typography variant="subtitle1">
                               {conversation.name}
                             </Typography>
@@ -140,7 +152,13 @@ const Conversations = () => {
                           </Box>
                         }
                         secondary={
-                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                            }}
+                          >
                             <Typography
                               variant="body2"
                               color="textSecondary"
@@ -183,7 +201,9 @@ const Conversations = () => {
 
         {/* Chat Area */}
         <Grid item xs={12} md={8}>
-          <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <Card
+            sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+          >
             <CardContent sx={{ flex: 1, overflow: 'auto' }}>
               <Box sx={{ mb: 2 }}>
                 <Typography variant="h6">
@@ -212,9 +232,7 @@ const Conversations = () => {
                         borderRadius: 2,
                       }}
                     >
-                      <Typography variant="body1">
-                        {message.message}
-                      </Typography>
+                      <Typography variant="body1">{message.message}</Typography>
                       <Typography
                         variant="caption"
                         sx={{
@@ -247,7 +265,7 @@ const Conversations = () => {
                   maxRows={4}
                   placeholder="Type a message..."
                   value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
+                  onChange={e => setNewMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
                 />
                 <IconButton
@@ -266,4 +284,4 @@ const Conversations = () => {
   );
 };
 
-export default Conversations; 
+export default Conversations;

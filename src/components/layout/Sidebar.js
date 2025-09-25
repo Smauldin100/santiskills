@@ -11,7 +11,7 @@ import {
   Divider,
   IconButton,
   Box,
-  Typography
+  Typography,
 } from '@mui/material';
 import {
   Dashboard as DashboardIcon,
@@ -43,23 +43,27 @@ const menuItems = [
     id: 'dashboard',
     label: 'Dashboard',
     icon: <DashboardIcon />,
-    path: '/dashboard'
+    path: '/dashboard',
   },
   {
     id: 'profile',
     label: 'Profile',
     icon: <ProfileIcon />,
-    path: '/profile'
+    path: '/profile',
   },
   {
     id: 'analytics',
     label: 'Analytics',
     icon: <AnalyticsIcon />,
     subItems: [
-      { id: 'performance', label: 'Performance', path: '/analytics/performance' },
+      {
+        id: 'performance',
+        label: 'Performance',
+        path: '/analytics/performance',
+      },
       { id: 'insights', label: 'Insights', path: '/analytics/insights' },
-      { id: 'reports', label: 'Reports', path: '/analytics/reports' }
-    ]
+      { id: 'reports', label: 'Reports', path: '/analytics/reports' },
+    ],
   },
   {
     id: 'planner',
@@ -68,14 +72,14 @@ const menuItems = [
     subItems: [
       { id: 'calendar', label: 'Calendar', path: '/planner/calendar' },
       { id: 'tasks', label: 'Tasks', path: '/planner/tasks' },
-      { id: 'goals', label: 'Goals', path: '/planner/goals' }
-    ]
+      { id: 'goals', label: 'Goals', path: '/planner/goals' },
+    ],
   },
   {
     id: 'notifications',
     label: 'Notifications',
     icon: <NotificationsIcon />,
-    path: '/notifications'
+    path: '/notifications',
   },
   {
     id: 'accounts',
@@ -83,22 +87,26 @@ const menuItems = [
     icon: <AccountsIcon />,
     subItems: [
       { id: 'social', label: 'Social Media', path: '/accounts/social' },
-      { id: 'professional', label: 'Professional', path: '/accounts/professional' },
-      { id: 'other', label: 'Other Platforms', path: '/accounts/other' }
-    ]
+      {
+        id: 'professional',
+        label: 'Professional',
+        path: '/accounts/professional',
+      },
+      { id: 'other', label: 'Other Platforms', path: '/accounts/other' },
+    ],
   },
   {
     id: 'conversations',
     label: 'Conversations',
     icon: <ConversationsIcon />,
-    path: '/conversations'
+    path: '/conversations',
   },
   {
     id: 'settings',
     label: 'Settings',
     icon: <SettingsIcon />,
-    path: '/settings'
-  }
+    path: '/settings',
+  },
 ];
 
 const Sidebar = ({ open, onClose, variant = 'permanent' }) => {
@@ -106,11 +114,11 @@ const Sidebar = ({ open, onClose, variant = 'permanent' }) => {
   const location = useLocation();
   const [expandedItems, setExpandedItems] = useState({});
 
-  const handleItemClick = (item) => {
+  const handleItemClick = item => {
     if (item.subItems) {
       setExpandedItems(prev => ({
         ...prev,
-        [item.id]: !prev[item.id]
+        [item.id]: !prev[item.id],
       }));
     } else {
       navigate(item.path);
@@ -120,9 +128,9 @@ const Sidebar = ({ open, onClose, variant = 'permanent' }) => {
     }
   };
 
-  const isSelected = (path) => location.pathname === path;
+  const isSelected = path => location.pathname === path;
 
-  const renderMenuItem = (item) => (
+  const renderMenuItem = item => (
     <React.Fragment key={item.id}>
       <ListItem disablePadding>
         <ListItemButton
@@ -133,22 +141,19 @@ const Sidebar = ({ open, onClose, variant = 'permanent' }) => {
             px: 2.5,
           }}
         >
-          <ListItemIcon sx={{ minWidth: 40 }}>
-            {item.icon}
-          </ListItemIcon>
-          <ListItemText 
+          <ListItemIcon sx={{ minWidth: 40 }}>{item.icon}</ListItemIcon>
+          <ListItemText
             primary={item.label}
             primaryTypographyProps={{
               fontSize: '0.9rem',
-              fontWeight: isSelected(item.path) ? 600 : 400
+              fontWeight: isSelected(item.path) ? 600 : 400,
             }}
           />
-          {item.subItems && (
-            expandedItems[item.id] ? <ExpandLess /> : <ExpandMore />
-          )}
+          {item.subItems &&
+            (expandedItems[item.id] ? <ExpandLess /> : <ExpandMore />)}
         </ListItemButton>
       </ListItem>
-      
+
       {item.subItems && (
         <Collapse in={expandedItems[item.id]} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
@@ -159,11 +164,11 @@ const Sidebar = ({ open, onClose, variant = 'permanent' }) => {
                 selected={isSelected(subItem.path)}
                 sx={{ pl: 4 }}
               >
-                <ListItemText 
+                <ListItemText
                   primary={subItem.label}
                   primaryTypographyProps={{
                     fontSize: '0.85rem',
-                    fontWeight: isSelected(subItem.path) ? 600 : 400
+                    fontWeight: isSelected(subItem.path) ? 600 : 400,
                   }}
                 />
               </ListItemButton>
@@ -200,11 +205,9 @@ const Sidebar = ({ open, onClose, variant = 'permanent' }) => {
         </IconButton>
       </DrawerHeader>
       <Divider />
-      <List>
-        {menuItems.map(renderMenuItem)}
-      </List>
+      <List>{menuItems.map(renderMenuItem)}</List>
     </Drawer>
   );
 };
 
-export default Sidebar; 
+export default Sidebar;

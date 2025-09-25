@@ -1,0 +1,363 @@
+{% extends "base.html" %}
+
+{% block title %}AI Dashboard - Home{% endblock %}
+
+{% block header %}Welcome to AI Dashboard{% endblock %}
+
+{% block content %}
+<div class="grid-container">
+    <!-- Quick Actions -->1
+    <div class="card">
+        <h2>
+            <span class="mdi mdi-lightning-bolt"></span>
+            Quick Actions
+        </h2>
+        <div class="quick-actions">
+            <a href="/chat" class="action-btn">
+                <span class="mdi mdi-message-text"></span>
+                Start Chat
+            </a>
+            <a href="/tools" class="action-btn">
+                <span class="mdi mdi-tools"></span>
+                Open Tools
+            </a>
+            <a href="/dashboard" class="action-btn">
+                <span class="mdi mdi-view-dashboard"></span>
+                View Dashboard
+            </a>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="card">
+        <h2>
+            <span class="mdi mdi-clock-outline"></span>
+            Recent Activity
+        </h2>
+        <div class="activity-list">
+            <div class="activity-item">
+                <span class="mdi mdi-message"></span>
+                <div class="activity-content">
+                    <p>Chat session completed</p>
+                    <small>2 minutes ago</small>
+                </div>
+            </div>
+            <div class="activity-item">
+                <span class="mdi mdi-file-document"></span>
+                <div class="activity-content">
+                    <p>Document analyzed</p>
+                    <small>1 hour ago</small>
+                </div>
+            </div>
+            <div class="activity-item">
+                <span class="mdi mdi-chart-bar"></span>
+                <div class="activity-content">
+                    <p>Data visualization created</p>
+                    <small>3 hours ago</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Tools -->
+    <div class="card">
+        <h2>
+            <span class="mdi mdi-robot"></span>
+            AI Tools
+        </h2>
+        <div class="tools-grid">
+            <div class="tool-item">
+                <span class="mdi mdi-text-recognition"></span>
+                <h3>Text Analysis</h3>
+                <p>Analyze text content with AI</p>
+            </div>
+            <div class="tool-item">
+                <span class="mdi mdi-image"></span>
+                <h3>Image Processing</h3>
+                <p>Process and analyze images</p>
+            </div>
+            <div class="tool-item">
+                <span class="mdi mdi-chart-scatter-plot"></span>
+                <h3>Data Analysis</h3>
+                <p>Analyze data with AI models</p>
+            </div>
+            <div class="tool-item">
+                <span class="mdi mdi-translate"></span>
+                <h3>Translation</h3>
+                <p>Translate text with AI</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Chat -->
+    <div class="card">
+        <h2>
+            <span class="mdi mdi-message-text-outline"></span>
+            Quick Chat
+        </h2>
+        <form id="quickChatForm" class="quick-chat-form">
+            <div class="input-group">
+                <input type="text" name="message" placeholder="Ask something..." required>
+                <button type="submit">
+                    <span class="mdi mdi-send"></span>
+                </button>
+            </div>
+        </form>
+        <div id="quickChatMessages" class="quick-chat-messages"></div>
+    </div>
+</div>
+
+<style>
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.card {
+    background-color: var(--secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+}
+
+.card h2 {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.card h2 span.mdi {
+    color: var(--accent);
+}
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background-color: var(--primary);
+    color: var(--text);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-speed) var(--transition-ease);
+}
+
+.action-btn:hover {
+    background-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.action-btn span.mdi {
+    font-size: 1.5rem;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    background-color: var(--primary);
+}
+
+.activity-item span.mdi {
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.activity-content p {
+    margin: 0;
+    color: var(--text);
+}
+
+.activity-content small {
+    color: var(--text-muted);
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.tool-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--spacing-md);
+    background-color: var(--primary);
+    border-radius: var(--radius-md);
+    transition: transform var(--transition-speed) var(--transition-ease);
+}
+
+.tool-item:hover {
+    transform: translateY(-4px);
+}
+
+.tool-item span.mdi {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: var(--spacing-sm);
+}
+
+.tool-item h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text);
+}
+
+.tool-item p {
+    margin: var(--spacing-xs) 0 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.quick-chat-form {
+    margin-top: var(--spacing-md);
+}
+
+.input-group {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.input-group input {
+    flex: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    border-radius: var(--radius-md);
+    background-color: var(--primary);
+    color: var(--text);
+}
+
+.input-group button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--accent);
+    color: var(--text);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-speed) var(--transition-ease);
+}
+
+.input-group button:hover {
+    filter: brightness(1.1);
+}
+
+.quick-chat-messages {
+    margin-top: var(--spacing-md);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    background-color: var(--primary);
+}
+
+.message-user {
+    margin-left: auto;
+    background-color: var(--accent);
+}
+
+.message-ai {
+    margin-right: auto;
+}
+
+.message span.mdi {
+    font-size: 1.25rem;
+}
+
+.message p {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const quickChatForm = document.getElementById('quickChatForm');
+    const quickChatMessages = document.getElementById('quickChatMessages');
+    
+    quickChatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const input = quickChatForm.querySelector('input');
+        const message = input.value.trim();
+        
+        if (message) {
+            // Add user message
+            addMessage('user', message);
+            input.value = '';
+            
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    addMessage('ai', data.response);
+                } else {
+                    throw new Error('Failed to get response');
+                }
+            } catch (error) {
+                console.error('Chat error:', error);
+                addMessage('error', 'Sorry, something went wrong. Please try again.');
+            }
+        }
+    });
+    
+    function addMessage(type, content) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', `message-${type}`);
+        
+        const icon = document.createElement('span');
+        icon.classList.add('mdi');
+        icon.classList.add(type === 'user' ? 'mdi-account' : 'mdi-robot');
+        
+        const text = document.createElement('p');
+        text.textContent = content;
+        
+        messageDiv.appendChild(icon);
+        messageDiv.appendChild(text);
+        
+        quickChatMessages.appendChild(messageDiv);
+        quickChatMessages.scrollTop = quickChatMessages.scrollHeight;
+    }
+});
+</script>
+{% endblock %}
+{% endblock %} 

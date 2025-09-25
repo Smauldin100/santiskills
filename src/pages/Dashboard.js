@@ -15,15 +15,53 @@ import {
   MoreVert as MoreVertIcon,
 } from '@mui/icons-material';
 import DataTable from '../components/common/DataTable';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as ChartTooltip, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip as ChartTooltip,
+  ResponsiveContainer,
+} from 'recharts';
 
 // Sample data - replace with real data from your backend
 const taskData = [
-  { id: 1, title: 'Complete Project Proposal', status: 'In Progress', priority: 'High', dueDate: '2024-03-15' },
-  { id: 2, title: 'Review Code Changes', status: 'Pending', priority: 'Medium', dueDate: '2024-03-14' },
-  { id: 3, title: 'Update Documentation', status: 'Completed', priority: 'Low', dueDate: '2024-03-13' },
-  { id: 4, title: 'Client Meeting', status: 'Scheduled', priority: 'High', dueDate: '2024-03-16' },
-  { id: 5, title: 'Bug Fixes', status: 'In Progress', priority: 'Medium', dueDate: '2024-03-15' },
+  {
+    id: 1,
+    title: 'Complete Project Proposal',
+    status: 'In Progress',
+    priority: 'High',
+    dueDate: '2024-03-15',
+  },
+  {
+    id: 2,
+    title: 'Review Code Changes',
+    status: 'Pending',
+    priority: 'Medium',
+    dueDate: '2024-03-14',
+  },
+  {
+    id: 3,
+    title: 'Update Documentation',
+    status: 'Completed',
+    priority: 'Low',
+    dueDate: '2024-03-13',
+  },
+  {
+    id: 4,
+    title: 'Client Meeting',
+    status: 'Scheduled',
+    priority: 'High',
+    dueDate: '2024-03-16',
+  },
+  {
+    id: 5,
+    title: 'Bug Fixes',
+    status: 'In Progress',
+    priority: 'Medium',
+    dueDate: '2024-03-15',
+  },
 ];
 
 const performanceData = [
@@ -37,16 +75,20 @@ const performanceData = [
 
 const taskColumns = [
   { id: 'title', label: 'Task', sortable: true },
-  { id: 'status', label: 'Status', sortable: true, type: 'status',
-    getStatusColor: (status) => {
+  {
+    id: 'status',
+    label: 'Status',
+    sortable: true,
+    type: 'status',
+    getStatusColor: status => {
       const colors = {
-        'Completed': 'success',
+        Completed: 'success',
         'In Progress': 'info',
-        'Pending': 'warning',
-        'Scheduled': 'secondary'
+        Pending: 'warning',
+        Scheduled: 'secondary',
       };
       return colors[status] || 'default';
-    }
+    },
   },
   { id: 'priority', label: 'Priority', sortable: true },
   { id: 'dueDate', label: 'Due Date', sortable: true },
@@ -54,6 +96,7 @@ const taskColumns = [
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetchingData, setIsFetchingData] = useState(false);
 
   const handleRefresh = () => {
     setIsLoading(true);
@@ -68,21 +111,69 @@ const Dashboard = () => {
     console.log('Add task clicked');
   };
 
-  const handleEditTask = (task) => {
+  const handleEditTask = task => {
     console.log('Edit task:', task);
   };
 
-  const handleDeleteTask = (task) => {
+  const handleDeleteTask = task => {
     console.log('Delete task:', task);
   };
 
-  const handleViewTask = (task) => {
+  const handleViewTask = task => {
     console.log('View task:', task);
+  };
+
+  const handleFetchApiData = async () => {
+    setIsFetchingData(true);
+    try {
+      // Replace with your actual API endpoint
+      const apiUrl = 'YOUR_API_ENDPOINT_HERE';
+
+      // Access environment variables (you may need to configure your project
+      // to expose these to the frontend, and consider using a backend proxy
+      // for sensitive keys).
+      const apiKey = process.env.REACT_APP_API_KEY; // Example: using REACT_APP prefix for Create React App
+      const apiEncryptionKey = process.env.REACT_APP_API_ENCRYPTION_KEY;
+      const apiRemark = process.env.REACT_APP_API_REMARK;
+      const apiJurisdiction = process.env.REACT_APP_API_JURISDICTION;
+      const apiBindingIp = process.env.REACT_APP_API_BINDING_IP;
+
+      const response = await fetch(apiUrl, {
+        method: 'GET', // Or the appropriate HTTP method (POST, etc.)
+        headers: {
+          'Content-Type': 'application/json',
+          // Add any required headers, including API keys if necessary
+          // Example: 'X-API-Key': apiKey,
+        },
+        // Add body for POST/PUT requests
+        // body: JSON.stringify({ /* data to send */ })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('API Data fetched successfully:', data);
+      // Process the fetched data here
+    } catch (error) {
+      console.error('Error fetching API data:', error);
+      // Handle errors (e.g., display an error message to the user)
+    } finally {
+      setIsFetchingData(false);
+    }
   };
 
   return (
     <Box sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 3,
+        }}
+      >
         <Typography variant="h4" component="h1" gutterBottom>
           Dashboard
         </Typography>
@@ -103,9 +194,7 @@ const Dashboard = () => {
               <Typography color="textSecondary" gutterBottom>
                 Total Tasks
               </Typography>
-              <Typography variant="h4">
-                24
-              </Typography>
+              <Typography variant="h4">24</Typography>
             </CardContent>
           </Card>
         </Grid>
@@ -115,9 +204,7 @@ const Dashboard = () => {
               <Typography color="textSecondary" gutterBottom>
                 Completed
               </Typography>
-              <Typography variant="h4">
-                12
-              </Typography>
+              <Typography variant="h4">12</Typography>
             </CardContent>
           </Card>
         </Grid>
@@ -127,9 +214,7 @@ const Dashboard = () => {
               <Typography color="textSecondary" gutterBottom>
                 In Progress
               </Typography>
-              <Typography variant="h4">
-                8
-              </Typography>
+              <Typography variant="h4">8</Typography>
             </CardContent>
           </Card>
         </Grid>
@@ -139,9 +224,7 @@ const Dashboard = () => {
               <Typography color="textSecondary" gutterBottom>
                 Pending
               </Typography>
-              <Typography variant="h4">
-                4
-              </Typography>
+              <Typography variant="h4">4</Typography>
             </CardContent>
           </Card>
         </Grid>
@@ -150,7 +233,14 @@ const Dashboard = () => {
         <Grid item xs={12} md={8}>
           <Card>
             <CardContent>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  mb: 2,
+                }}
+              >
                 <Typography variant="h6">Performance Overview</Typography>
                 <IconButton size="small">
                   <MoreVertIcon />
@@ -188,15 +278,17 @@ const Dashboard = () => {
                   Add New Task
                 </Button>
                 <Button
-                  variant="outlined"
+                  variant="contained"
+                  onClick={handleFetchApiData}
+                  disabled={isFetchingData}
                   fullWidth
                 >
+                  {isFetchingData ? 'Fetching...' : 'Fetch API Data'}
+                </Button>
+                <Button variant="outlined" fullWidth>
                   Generate Report
                 </Button>
-                <Button
-                  variant="outlined"
-                  fullWidth
-                >
+                <Button variant="outlined" fullWidth>
                   Schedule Meeting
                 </Button>
               </Box>
@@ -220,4 +312,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard; 
+export default Dashboard;

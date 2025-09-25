@@ -52,16 +52,20 @@ const initialTasks = [
 const taskColumns = [
   { id: 'title', label: 'Task', sortable: true },
   { id: 'description', label: 'Description', sortable: true },
-  { id: 'status', label: 'Status', sortable: true, type: 'status',
-    getStatusColor: (status) => {
+  {
+    id: 'status',
+    label: 'Status',
+    sortable: true,
+    type: 'status',
+    getStatusColor: status => {
       const colors = {
-        'Completed': 'success',
+        Completed: 'success',
         'In Progress': 'info',
-        'Pending': 'warning',
-        'Scheduled': 'secondary'
+        Pending: 'warning',
+        Scheduled: 'secondary',
       };
       return colors[status] || 'default';
-    }
+    },
   },
   { id: 'priority', label: 'Priority', sortable: true },
   { id: 'dueDate', label: 'Due Date', sortable: true },
@@ -104,19 +108,21 @@ const Tasks = () => {
     setEditingTask(null);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = () => {
     if (editingTask) {
-      setTasks(prev => prev.map(task => 
-        task.id === editingTask.id ? { ...formData, id: task.id } : task
-      ));
+      setTasks(prev =>
+        prev.map(task =>
+          task.id === editingTask.id ? { ...formData, id: task.id } : task
+        )
+      );
     } else {
       const newTask = {
         ...formData,
@@ -127,7 +133,7 @@ const Tasks = () => {
     handleCloseDialog();
   };
 
-  const handleDeleteTask = (task) => {
+  const handleDeleteTask = task => {
     setTasks(prev => prev.filter(t => t.id !== task.id));
   };
 
@@ -140,7 +146,14 @@ const Tasks = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 3,
+        }}
+      >
         <Typography variant="h4" component="h1">
           Tasks Management
         </Typography>
@@ -160,9 +173,7 @@ const Tasks = () => {
               <Typography color="textSecondary" gutterBottom>
                 Total Tasks
               </Typography>
-              <Typography variant="h4">
-                {tasksByStatus.total}
-              </Typography>
+              <Typography variant="h4">{tasksByStatus.total}</Typography>
             </CardContent>
           </Card>
         </Grid>
@@ -212,7 +223,12 @@ const Tasks = () => {
         onDelete={handleDeleteTask}
       />
 
-      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        maxWidth="sm"
+        fullWidth
+      >
         <DialogTitle>{editingTask ? 'Edit Task' : 'Add New Task'}</DialogTitle>
         <DialogContent>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 2 }}>
@@ -295,4 +311,4 @@ const Tasks = () => {
   );
 };
 
-export default Tasks; 
+export default Tasks;
